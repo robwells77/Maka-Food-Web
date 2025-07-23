@@ -1,0 +1,646 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.6">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Barracouta Food Web (New Zealand)&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;display=swap" rel="stylesheet"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* General body styling */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Inter', sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #e0f2f7; /* Light blue background */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-sizing: border-box;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #333;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Main container for the app */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #ffffff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 25px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 900px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-sizing: border-box;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Title styling */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>h1 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #007bff; /* Blue for title */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 2.2em;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Introduction text */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.intro {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.1em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.6;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #555;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Canvas styling */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>canvas {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #f0f8ff; /* Very light blue for canvas */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 2px solid #a7d9ed; /* Border for canvas */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: block;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%; /* Make canvas responsive */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 800px; /* Max width for canvas */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>height: 500px; /* Fixed height for canvas */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 auto;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Info box styling */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.info-box {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #e6f7ff; /* Lighter blue for info box */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: 1px solid #b3e0ff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-height: 80px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: left;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.info-box h3 {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #0056b3; /* Darker blue for info box title */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-bottom: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.3em;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.info-box p {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 5px 0;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 0.95em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #444;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.fun-fact-output, .impact-prediction-output {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-style: italic;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #666;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-top: 1px dashed #b3e0ff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding-top: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Button styling */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.controls {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-top: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>gap: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>button {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #28a745; /* Green button */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 12px 25px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 1.1em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>button:hover {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #218838; /* Darker green on hover */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(-2px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>button:active {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: translateY(0);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>button:disabled {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: #cccccc;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: not-allowed;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transform: none;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.loading-indicator {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin-left: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-style: italic;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: #007bff;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* Responsive adjustments */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 768px) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>h1 {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>font-size: 1.8em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.intro {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>font-size: 1em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.container {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>padding: 15px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>canvas {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>height: 400px; /* Adjust canvas height for smaller screens */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>button {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>padding: 10px 20px;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>font-size: 1em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.controls {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>flex-direction: column;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>gap: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>@media (max-width: 480px) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>h1 {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>font-size: 1.5em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.intro {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>font-size: 0.9em;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>canvas {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>height: 300px; /* Further adjust canvas height for very small screens */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>.info-box {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>padding: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h1&gt;Barracouta Food Web (New Zealand)&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;p class="intro"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Explore the intricate food web centered around the barracouta, a common fish found in New Zealand waters.</p>
+<p class="p1"><span class="Apple-converted-space">            </span>Click on any organism to see its role as a predator or prey within this marine ecosystem.</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/p&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;canvas id="foodWebCanvas"&gt;&lt;/canvas&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="info-box"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h3 id="organismName"&gt;Click an organism to learn more!&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p id="organismRole"&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p id="organismEats"&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p id="organismEatenBy"&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p id="funFactOutput" class="fun-fact-output"&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p id="impactPredictionOutput" class="impact-prediction-output"&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="controls"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button id="funFactButton" disabled&gt;✨ Generate Fun Fact&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button id="predictImpactButton" disabled&gt;✨ Predict Impact&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;span id="loadingIndicator" class="loading-indicator" style="display: none;"&gt;Generating...&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;button id="resetButton"&gt;Reset View&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Get the canvas element and its 2D rendering context</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const canvas = document.getElementById('foodWebCanvas');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const ctx = canvas.getContext('2d');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Get info box elements</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const organismNameElem = document.getElementById('organismName');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const organismRoleElem = document.getElementById('organismRole');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const organismEatsElem = document.getElementById('organismEats');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const organismEatenByElem = document.getElementById('organismEatenBy');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const funFactOutputElem = document.getElementById('funFactOutput');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const impactPredictionOutputElem = document.getElementById('impactPredictionOutput');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const funFactButton = document.getElementById('funFactButton');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const predictImpactButton = document.getElementById('predictImpactButton');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const loadingIndicator = document.getElementById('loadingIndicator');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const resetButton = document.getElementById('resetButton');</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Define the organisms and their relationships in the food web</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const organisms = [</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: 'Phytoplankton', type: 'Producer', eats: [], eatenBy: ['Zooplankton', 'Mullet'], pos: { x: 0, y: 0 }, emoji: '🦠' }, // Microbe emoji</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: 'Zooplankton', type: 'Primary Consumer', eats: ['Phytoplankton'], eatenBy: ['Sprat &amp; Pilchard', 'Krill', 'Mullet'], pos: { x: 0, y: 0 }, emoji: '🦐' }, // Shrimp emoji</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: 'Krill', type: 'Primary Consumer', eats: ['Phytoplankton', 'Zooplankton'], eatenBy: ['Sprat &amp; Pilchard', 'Squid', 'Barracouta'], pos: { x: 0, y: 0 }, emoji: '🍤' }, // Fried shrimp emoji (closest to krill)</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: 'Sprat &amp; Pilchard', type: 'Secondary Consumer', eats: ['Zooplankton', 'Krill'], eatenBy: ['Squid', 'Barracouta', 'Seals', 'Dolphins', 'Larger Fish'], pos: { x: 0, y: 0 }, emoji: '🐟' }, // Fish emoji</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: 'Mullet', type: 'Primary/Secondary Consumer', eats: ['Phytoplankton', 'Zooplankton'], eatenBy: ['Barracouta', 'Sharks', 'Dolphins', 'Seals', 'Larger Fish', 'Humans'], pos: { x: 0, y: 0 }, emoji: '🐠' }, // Tropical fish emoji</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: 'Squid', type: 'Secondary Consumer', eats: ['Sprat &amp; Pilchard', 'Krill', 'Mullet'], eatenBy: ['Barracouta', 'Sharks', 'Dolphins', 'Larger Fish', 'Seals'], pos: { x: 0, y: 0 }, emoji: '🦑' }, // Squid emoji</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: 'Barracouta', type: 'Tertiary Consumer', eats: ['Sprat &amp; Pilchard', 'Squid', 'Krill', 'Mullet'], eatenBy: ['Sharks', 'Dolphins', 'Seals', 'Larger Fish', 'Humans'], pos: { x: 0, y: 0 }, emoji: '🎣' }, // Fishing rod (representing a predatory fish)</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: 'Sharks', type: 'Apex Predator', eats: ['Barracouta', 'Larger Fish', 'Seals', 'Dolphins', 'Squid', 'Mullet'], eatenBy: ['Humans'], pos: { x: 0, y: 0 }, emoji: '🦈' }, // Shark emoji</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: 'Dolphins', type: 'Apex Predator', eats: ['Barracouta', 'Sprat &amp; Pilchard', 'Squid', 'Mullet'], eatenBy: ['Sharks'], pos: { x: 0, y: 0 }, emoji: '🐬' }, // Dolphin emoji</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: 'Seals', type: 'Apex Predator', eats: ['Barracouta', 'Sprat &amp; Pilchard', 'Squid', 'Mullet'], eatenBy: ['Sharks', 'Humans'], pos: { x: 0, y: 0 }, emoji: '🦭' }, // Seal emoji</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: 'Larger Fish', type: 'Tertiary Consumer', eats: ['Barracouta', 'Sprat &amp; Pilchard', 'Squid', 'Mullet'], eatenBy: ['Sharks', 'Dolphins', 'Humans'], pos: { x: 0, y: 0 }, emoji: '🐡' }, // Pufferfish (representing a larger, generic fish)</p>
+<p class="p1"><span class="Apple-converted-space">            </span>{ name: 'Humans', type: 'Apex Predator', eats: ['Barracouta', 'Sharks', 'Seals', 'Larger Fish', 'Mullet'], eatenBy: [], pos: { x: 0, y: 0 }, emoji: '👤' } // Silhouette emoji</p>
+<p class="p1"><span class="Apple-converted-space">        </span>];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Configuration for drawing nodes and lines</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const nodeRadius = 50; // Radius of the circular nodes (for click detection and text positioning)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const emojiSize = 48; // Size for the emojis (larger for better visibility)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const lineColor = '#4CAF50'; // Green for food web lines</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const lineWidth = 2;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const highlightColor = '#FFD700'; // Gold for highlighting</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const highlightLineWidth = 4;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const textColor = '#333';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const fontSize = 14;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>let selectedOrganism = null; // Stores the currently selected organism</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Sets the initial positions of the organisms on the canvas.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* This uses a simple circular layout for better visualization.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function setInitialPositions() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const centerX = canvas.width / 2;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const centerY = canvas.height / 2;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const radius = Math.min(centerX, centerY) * 0.6; // Smaller radius to fit emojis and text</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>organisms.forEach((org, index) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const angle = (index / organisms.length) * Math.PI * 2; // Distribute evenly in a circle</p>
+<p class="p1"><span class="Apple-converted-space">                </span>org.pos.x = centerX + radius * Math.cos(angle);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>org.pos.y = centerY + radius * Math.sin(angle);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Draws an arrow from one point to another on the canvas.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* @param {number} fromX - X coordinate of the start point.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* @param {number} fromY - Y coordinate of the start point.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* @param {number} toX - X coordinate of the end point.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* @param {number} toY - Y coordinate of the end point.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* @param {string} color - Color of the arrow.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* @param {number} width - Line width of the arrow.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function drawArrow(fromX, fromY, toX, toY, color, width) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const headlen = 10; // Length of the arrow head</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const angle = Math.atan2(toY - fromY, toX - fromX);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>ctx.beginPath();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>ctx.moveTo(fromX, fromY);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>ctx.lineTo(toX, toY);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>ctx.strokeStyle = color;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>ctx.lineWidth = width;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>ctx.stroke();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Draw the arrow head</p>
+<p class="p1"><span class="Apple-converted-space">            </span>ctx.beginPath();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>ctx.moveTo(toX, toY);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>ctx.lineTo(toX - headlen * Math.cos(angle - Math.PI / 6), toY - headlen * Math.sin(angle - Math.PI / 6));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>ctx.moveTo(toX, toY);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>ctx.lineTo(toX - headlen * Math.cos(angle + Math.PI / 6), toY - headlen * Math.sin(angle + Math.PI / 6));</p>
+<p class="p1"><span class="Apple-converted-space">            </span>ctx.strokeStyle = color;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>ctx.lineWidth = width;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>ctx.stroke();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Draws the entire food web on the canvas.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* This includes drawing all organisms as nodes (emojis) and the</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* predator-prey relationships as directed lines (arrows).</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function drawFoodWeb() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Clear the canvas before redrawing</p>
+<p class="p1"><span class="Apple-converted-space">            </span>ctx.clearRect(0, 0, canvas.width, canvas.height);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Draw lines (relationships) first</p>
+<p class="p1"><span class="Apple-converted-space">            </span>organisms.forEach(predator =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>predator.eats.forEach(preyName =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const prey = organisms.find(o =&gt; o.name === preyName);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>if (prey) {</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>// Calculate start and end points for the arrow, slightly offset from the node centers</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const dx = prey.pos.x - predator.pos.x;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const dy = prey.pos.y - predator.pos.y;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const dist = Math.sqrt(dx * dx + dy * dy);</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const unitX = dx / dist;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const unitY = dy / dist;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>// Start and end points are offset by nodeRadius to draw from edge to edge</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const startX = predator.pos.x + unitX * nodeRadius;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const startY = predator.pos.y + unitY * nodeRadius;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const endX = prey.pos.x - unitX * nodeRadius;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const endY = prey.pos.y - unitY * nodeRadius;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>// Check if this line needs to be highlighted</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>const isHighlighted = selectedOrganism &amp;&amp;</p>
+<p class="p1"><span class="Apple-converted-space">                            </span>((selectedOrganism === predator &amp;&amp; predator.eats.includes(prey.name)) ||</p>
+<p class="p1"><span class="Apple-converted-space">                             </span>(selectedOrganism === prey &amp;&amp; prey.eatenBy.includes(predator.name)));</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                        </span>drawArrow(startX, startY, endX, endY, isHighlighted ? highlightColor : lineColor, isHighlighted ? highlightLineWidth : lineWidth);</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Draw nodes (organisms) on top of the lines</p>
+<p class="p1"><span class="Apple-converted-space">            </span>organisms.forEach(org =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Draw highlight circle behind emoji if selected</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (org === selectedOrganism) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>ctx.beginPath();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>ctx.arc(org.pos.x, org.pos.y, nodeRadius + 5, 0, Math.PI * 2); // Slightly larger highlight</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>ctx.fillStyle = highlightColor;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>ctx.shadowBlur = 15;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>ctx.shadowOffsetX = 5;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>ctx.shadowOffsetY = 5;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>ctx.fill();</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>ctx.shadowBlur = 0; // Reset shadow</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>ctx.shadowOffsetX = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>ctx.shadowOffsetY = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Draw the background circle for the emoji</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.beginPath();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.arc(org.pos.x, org.pos.y, nodeRadius, 0, Math.PI * 2);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.fillStyle = '#87CEEB'; // Sky blue for nodes</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.shadowBlur = 8;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.shadowOffsetX = 3;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.shadowOffsetY = 3;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.fill();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.strokeStyle = '#007bff';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.lineWidth = 2;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.stroke();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Reset shadow for text</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.shadowBlur = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.shadowOffsetX = 0;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.shadowOffsetY = 0;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Draw emoji</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.fillStyle = textColor;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.font = `${emojiSize}px Inter`; // Set font size for emoji</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.textAlign = 'center';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.textBaseline = 'middle';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.fillText(org.emoji, org.pos.x, org.pos.y - 10); // Position emoji slightly above center</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Draw text (organism name) below the emoji</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.fillStyle = textColor;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.font = `${fontSize}px Inter`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.textAlign = 'center';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.textBaseline = 'top'; // Align text to the top of its bounding box</p>
+<p class="p1"><span class="Apple-converted-space">                </span>ctx.fillText(org.name, org.pos.x, org.pos.y + (emojiSize / 2) - 5); // Position below the emoji</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Calls the Gemini API to generate a fun fact about the selected organism.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>async function generateFunFact() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!selectedOrganism) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>funFactOutputElem.textContent = "Please select an organism first!";</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>loadingIndicator.style.display = 'inline'; // Show loading indicator</p>
+<p class="p1"><span class="Apple-converted-space">            </span>funFactButton.disabled = true; // Disable button during generation</p>
+<p class="p1"><span class="Apple-converted-space">            </span>predictImpactButton.disabled = true; // Also disable other LLM button</p>
+<p class="p1"><span class="Apple-converted-space">            </span>funFactOutputElem.textContent = ''; // Clear previous fact</p>
+<p class="p1"><span class="Apple-converted-space">            </span>impactPredictionOutputElem.textContent = ''; // Clear previous impact prediction</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const prompt = `Give me a short, interesting fun fact about ${selectedOrganism.name} in the context of the New Zealand marine environment. Keep it concise, one to two sentences.`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let chatHistory = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>chatHistory.push({ role: "user", parts: [{ text: prompt }] });</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const payload = { contents: chatHistory };</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const apiKey = ""; // Canvas will automatically provide the API key</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const response = await fetch(apiUrl, {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>method: 'POST',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>headers: { 'Content-Type': 'application/json' },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>body: JSON.stringify(payload)</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const result = await response.json();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (result.candidates &amp;&amp; result.candidates.length &gt; 0 &amp;&amp;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>result.candidates[0].content &amp;&amp; result.candidates[0].content.parts &amp;&amp;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>result.candidates[0].content.parts.length &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const text = result.candidates[0].content.parts[0].text;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>funFactOutputElem.textContent = `Fun Fact: ${text}`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>funFactOutputElem.textContent = "Could not generate a fun fact. Please try again.";</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>console.error("Gemini API response structure unexpected:", result);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} catch (error) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>funFactOutputElem.textContent = "Error generating fun fact. Check console for details.";</p>
+<p class="p1"><span class="Apple-converted-space">                </span>console.error("Error calling Gemini API:", error);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} finally {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>loadingIndicator.style.display = 'none'; // Hide loading indicator</p>
+<p class="p1"><span class="Apple-converted-space">                </span>funFactButton.disabled = false; // Re-enable button</p>
+<p class="p1"><span class="Apple-converted-space">                </span>predictImpactButton.disabled = false; // Re-enable other LLM button</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Calls the Gemini API to predict the impact of population change on the food web.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>async function predictImpact() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!selectedOrganism) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>impactPredictionOutputElem.textContent = "Please select an organism first!";</p>
+<p class="p1"><span class="Apple-converted-space">                </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>loadingIndicator.style.display = 'inline'; // Show loading indicator</p>
+<p class="p1"><span class="Apple-converted-space">            </span>funFactButton.disabled = true; // Disable other LLM button</p>
+<p class="p1"><span class="Apple-converted-space">            </span>predictImpactButton.disabled = true; // Disable button during generation</p>
+<p class="p1"><span class="Apple-converted-space">            </span>funFactOutputElem.textContent = ''; // Clear previous fun fact</p>
+<p class="p1"><span class="Apple-converted-space">            </span>impactPredictionOutputElem.textContent = ''; // Clear previous impact prediction</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const prompt = `Considering a marine food web in New Zealand where ${selectedOrganism.name} is a ${selectedOrganism.type}, what would be the likely impact on the food web if the population of ${selectedOrganism.name} significantly decreased? Focus on direct and indirect effects on its prey and predators. Provide a concise summary in 2-3 sentences.`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let chatHistory = [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>chatHistory.push({ role: "user", parts: [{ text: prompt }] });</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>const payload = { contents: chatHistory };</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const apiKey = ""; // Canvas will automatically provide the API key</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>try {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const response = await fetch(apiUrl, {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>method: 'POST',</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>headers: { 'Content-Type': 'application/json' },</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>body: JSON.stringify(payload)</p>
+<p class="p1"><span class="Apple-converted-space">                </span>});</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const result = await response.json();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (result.candidates &amp;&amp; result.candidates.length &gt; 0 &amp;&amp;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>result.candidates[0].content &amp;&amp; result.candidates[0].content.parts &amp;&amp;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>result.candidates[0].content.parts.length &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>const text = result.candidates[0].content.parts[0].text;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>impactPredictionOutputElem.textContent = `Impact Prediction: ${text}`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>impactPredictionOutputElem.textContent = "Could not predict impact. Please try again.";</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>console.error("Gemini API response structure unexpected:", result);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} catch (error) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>impactPredictionOutputElem.textContent = "Error predicting impact. Check console for details.";</p>
+<p class="p1"><span class="Apple-converted-space">                </span>console.error("Error calling Gemini API:", error);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} finally {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>loadingIndicator.style.display = 'none'; // Hide loading indicator</p>
+<p class="p1"><span class="Apple-converted-space">                </span>funFactButton.disabled = false; // Re-enable other LLM button</p>
+<p class="p1"><span class="Apple-converted-space">                </span>predictImpactButton.disabled = false; // Re-enable button</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Updates the information box with details of the selected organism.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* @param {object | null} organism - The organism object to display, or null to clear.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateInfoBox(organism) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (organism) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>organismNameElem.textContent = organism.name;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>organismRoleElem.textContent = `Type: ${organism.type}`;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Display what it eats</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (organism.eats.length &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>organismEatsElem.textContent = `Eats: ${organism.eats.join(', ')}`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>organismEatsElem.textContent = 'Eats: Nothing (Producer)';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Display what eats it</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (organism.eatenBy.length &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>organismEatenByElem.textContent = `Eaten by: ${organism.eatenBy.join(', ')}`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>organismEatenByElem.textContent = 'Eaten by: Nothing (Apex Predator)';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">                </span>funFactButton.disabled = false; // Enable fun fact button</p>
+<p class="p1"><span class="Apple-converted-space">                </span>predictImpactButton.disabled = false; // Enable predict impact button</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Clear the info box</p>
+<p class="p1"><span class="Apple-converted-space">                </span>organismNameElem.textContent = 'Click an organism to learn more!';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>organismRoleElem.textContent = '';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>organismEatsElem.textContent = '';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>organismEatenByElem.textContent = '';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>funFactButton.disabled = true; // Disable fun fact button</p>
+<p class="p1"><span class="Apple-converted-space">                </span>predictImpactButton.disabled = true; // Disable predict impact button</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>funFactOutputElem.textContent = ''; // Clear previous fun fact</p>
+<p class="p1"><span class="Apple-converted-space">            </span>impactPredictionOutputElem.textContent = ''; // Clear previous impact prediction</p>
+<p class="p1"><span class="Apple-converted-space">            </span>loadingIndicator.style.display = 'none'; // Hide loading indicator</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Handles clicks on the canvas to select an organism.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* @param {MouseEvent} event - The click event object.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function handleCanvasClick(event) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Get click coordinates relative to the canvas</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const rect = canvas.getBoundingClientRect();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const clickX = event.clientX - rect.left;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const clickY = event.clientY - rect.top;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>let clickedOrg = null;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Check if any organism node was clicked. Use nodeRadius for click detection.</p>
+<p class="p1"><span class="Apple-converted-space">            </span>for (const org of organisms) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const distance = Math.sqrt(</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>Math.pow(clickX - org.pos.x, 2) +</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>Math.pow(clickY - org.pos.y, 2)</p>
+<p class="p1"><span class="Apple-converted-space">                </span>);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>if (distance &lt;= nodeRadius) { // Click detection based on nodeRadius</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>clickedOrg = org;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>break;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Update selected organism and redraw</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (clickedOrg) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>selectedOrganism = clickedOrg;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>selectedOrganism = null; // Clicked outside any organism</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateInfoBox(selectedOrganism);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>drawFoodWeb(); // Redraw to show highlights</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Handles the reset button click.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function handleReset() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>selectedOrganism = null;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateInfoBox(null);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>drawFoodWeb();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/**</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* Adjusts canvas dimensions to match its display size.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* This is crucial for preventing blurry drawings on high-DPI screens</p>
+<p class="p1"><span class="Apple-converted-space">         </span>* and ensuring correct coordinate mapping.</p>
+<p class="p1"><span class="Apple-converted-space">         </span>*/</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function resizeCanvas() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Get the computed style of the canvas to determine its actual display size</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const style = getComputedStyle(canvas);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const displayWidth = parseFloat(style.width);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const displayHeight = parseFloat(style.height);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Set the canvas's internal drawing buffer size to match its display size</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (canvas.width !== displayWidth || canvas.height !== displayHeight) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>canvas.width = displayWidth;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>canvas.height = displayHeight;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>// Recalculate positions and redraw after resize</p>
+<p class="p1"><span class="Apple-converted-space">                </span>setInitialPositions();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>drawFoodWeb();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// --- Event Listeners and Initial Setup ---</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Listen for canvas clicks</p>
+<p class="p1"><span class="Apple-converted-space">        </span>canvas.addEventListener('click', handleCanvasClick);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Listen for reset button clicks</p>
+<p class="p1"><span class="Apple-converted-space">        </span>resetButton.addEventListener('click', handleReset);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Listen for fun fact button clicks</p>
+<p class="p1"><span class="Apple-converted-space">        </span>funFactButton.addEventListener('click', generateFunFact);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Listen for predict impact button clicks</p>
+<p class="p1"><span class="Apple-converted-space">        </span>predictImpactButton.addEventListener('click', predictImpact);</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Initial setup when the window loads</p>
+<p class="p1"><span class="Apple-converted-space">        </span>window.onload = function() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Set initial canvas size and organism positions</p>
+<p class="p1"><span class="Apple-converted-space">            </span>resizeCanvas(); // Set initial canvas size based on CSS</p>
+<p class="p1"><span class="Apple-converted-space">            </span>setInitialPositions(); // Arrange organisms on the canvas</p>
+<p class="p1"><span class="Apple-converted-space">            </span>drawFoodWeb(); // Draw the initial food web with emojis</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateInfoBox(null); // Clear info box initially</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>// Add a resize listener to redraw the canvas if the window size changes</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// This ensures the food web remains responsive</p>
+<p class="p1"><span class="Apple-converted-space">            </span>window.addEventListener('resize', resizeCanvas);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// Prevent context menu on right click on canvas, if desired (optional)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>canvas.addEventListener('contextmenu', function(e) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>e.preventDefault();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
