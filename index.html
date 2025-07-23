@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barracouta Food Web (New Zealand)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General body styling */
+        body {
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #e0f2f7; /* Light blue background */
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            color: #333;
+        }
+
+        /* Main container for the app */
+        .container {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            padding: 25px;
+            text-align: center;
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Title styling */
+        h1 {
+            color: #007bff; /* Blue for title */
+            margin-bottom: 15px;
+            font-size: 2.2em;
+        }
+
+        /* Introduction text */
+        .intro {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        /* Canvas styling */
+        canvas {
+            background-color: #f0f8ff; /* Very light blue for canvas */
+            border: 2px solid #a7d9ed; /* Border for canvas */
+            border-radius: 10px;
+            display: block;
+            width: 100%; /* Make canvas responsive */
+            max-width: 800px; /* Max width for canvas */
+            height: 500px; /* Fixed height for canvas */
+            margin: 0 auto;
+            cursor: pointer;
+        }
+
+        /* Info box styling */
+        .info-box {
+            background-color: #e6f7ff; /* Lighter blue for info box */
+            border: 1px solid #b3e0ff;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            min-height: 80px;
+            text-align: left;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .info-box h3 {
+            color: #0056b3; /* Darker blue for info box title */
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .info-box p {
+            margin: 5px 0;
+            font-size: 0.95em;
+            color: #444;
+        }
+
+        .fun-fact-output, .impact-prediction-output {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
+            border-top: 1px dashed #b3e0ff;
+            padding-top: 10px;
+        }
+
+        /* Button styling */
+        .controls {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        button {
+            background-color: #28a745; /* Green button */
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        button:hover {
+            background-color: #218838; /* Darker green on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .loading-indicator {
+            margin-left: 10px;
+            font-style: italic;
+            color: #007bff;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            .intro {
+                font-size: 1em;
+            }
+            .container {
+                padding: 15px;
+            }
+            canvas {
+                height: 400px; /* Adjust canvas height for smaller screens */
+            }
+            button {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+            .controls {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            .intro {
+                font-size: 0.9em;
+            }
+            canvas {
+                height: 300px; /* Further adjust canvas height for very small screens */
+            }
+            .info-box {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Barracouta Food Web (New Zealand)</h1>
+        <p class="intro">
+            Explore the intricate food web centered around the barracouta, a common fish found in New Zealand waters.
+            Click on any organism to see its role as a predator or prey within this marine ecosystem.
+        </p>
+
+        <canvas id="foodWebCanvas"></canvas>
+
+        <div class="info-box">
+            <h3 id="organismName">Click an organism to learn more!</h3>
+            <p id="organismRole"></p>
+            <p id="organismEats"></p>
+            <p id="organismEatenBy"></p>
+            <p id="funFactOutput" class="fun-fact-output"></p>
+            <p id="impactPredictionOutput" class="impact-prediction-output"></p>
+        </div>
+
+        <div class="controls">
+            <button id="funFactButton" disabled>✨ Generate Fun Fact</button>
+            <button id="predictImpactButton" disabled>✨ Predict Impact</button>
+            <span id="loadingIndicator" class="loading-indicator" style="display: none;">Generating...</span>
+            <button id="resetButton">Reset View</button>
+        </div>
+    </div>
+
+    <script>
+        // Get the canvas element and its 2D rendering context
+        const canvas = document.getElementById('foodWebCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Get info box elements
+        const organismNameElem = document.getElementById('organismName');
+        const organismRoleElem = document.getElementById('organismRole');
+        const organismEatsElem = document.getElementById('organismEats');
+        const organismEatenByElem = document.getElementById('organismEatenBy');
+        const funFactOutputElem = document.getElementById('funFactOutput');
+        const impactPredictionOutputElem = document.getElementById('impactPredictionOutput');
+        const funFactButton = document.getElementById('funFactButton');
+        const predictImpactButton = document.getElementById('predictImpactButton');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+        const resetButton = document.getElementById('resetButton');
+
+        // Define the organisms and their relationships in the food web
+        const organisms = [
+            { name: 'Phytoplankton', type: 'Producer', eats: [], eatenBy: ['Zooplankton', 'Mullet'], pos: { x: 0, y: 0 }, emoji: '🦠' }, // Microbe emoji
+            { name: 'Zooplankton', type: 'Primary Consumer', eats: ['Phytoplankton'], eatenBy: ['Sprat & Pilchard', 'Krill', 'Mullet'], pos: { x: 0, y: 0 }, emoji: '🦐' }, // Shrimp emoji
+            { name: 'Krill', type: 'Primary Consumer', eats: ['Phytoplankton', 'Zooplankton'], eatenBy: ['Sprat & Pilchard', 'Squid', 'Barracouta'], pos: { x: 0, y: 0 }, emoji: '🍤' }, // Fried shrimp emoji (closest to krill)
+            { name: 'Sprat & Pilchard', type: 'Secondary Consumer', eats: ['Zooplankton', 'Krill'], eatenBy: ['Squid', 'Barracouta', 'Seals', 'Dolphins', 'Larger Fish'], pos: { x: 0, y: 0 }, emoji: '🐟' }, // Fish emoji
+            { name: 'Mullet', type: 'Primary/Secondary Consumer', eats: ['Phytoplankton', 'Zooplankton'], eatenBy: ['Barracouta', 'Sharks', 'Dolphins', 'Seals', 'Larger Fish', 'Humans'], pos: { x: 0, y: 0 }, emoji: '🐠' }, // Tropical fish emoji
+            { name: 'Squid', type: 'Secondary Consumer', eats: ['Sprat & Pilchard', 'Krill', 'Mullet'], eatenBy: ['Barracouta', 'Sharks', 'Dolphins', 'Larger Fish', 'Seals'], pos: { x: 0, y: 0 }, emoji: '🦑' }, // Squid emoji
+            { name: 'Barracouta', type: 'Tertiary Consumer', eats: ['Sprat & Pilchard', 'Squid', 'Krill', 'Mullet'], eatenBy: ['Sharks', 'Dolphins', 'Seals', 'Larger Fish', 'Humans'], pos: { x: 0, y: 0 }, emoji: '🎣' }, // Fishing rod (representing a predatory fish)
+            { name: 'Sharks', type: 'Apex Predator', eats: ['Barracouta', 'Larger Fish', 'Seals', 'Dolphins', 'Squid', 'Mullet'], eatenBy: ['Humans'], pos: { x: 0, y: 0 }, emoji: '🦈' }, // Shark emoji
+            { name: 'Dolphins', type: 'Apex Predator', eats: ['Barracouta', 'Sprat & Pilchard', 'Squid', 'Mullet'], eatenBy: ['Sharks'], pos: { x: 0, y: 0 }, emoji: '🐬' }, // Dolphin emoji
+            { name: 'Seals', type: 'Apex Predator', eats: ['Barracouta', 'Sprat & Pilchard', 'Squid', 'Mullet'], eatenBy: ['Sharks', 'Humans'], pos: { x: 0, y: 0 }, emoji: '🦭' }, // Seal emoji
+            { name: 'Larger Fish', type: 'Tertiary Consumer', eats: ['Barracouta', 'Sprat & Pilchard', 'Squid', 'Mullet'], eatenBy: ['Sharks', 'Dolphins', 'Humans'], pos: { x: 0, y: 0 }, emoji: '🐡' }, // Pufferfish (representing a larger, generic fish)
+            { name: 'Humans', type: 'Apex Predator', eats: ['Barracouta', 'Sharks', 'Seals', 'Larger Fish', 'Mullet'], eatenBy: [], pos: { x: 0, y: 0 }, emoji: '👤' } // Silhouette emoji
+        ];
+
+        // Configuration for drawing nodes and lines
+        const nodeRadius = 50; // Radius of the circular nodes (for click detection and text positioning)
+        const emojiSize = 48; // Size for the emojis (larger for better visibility)
+        const lineColor = '#4CAF50'; // Green for food web lines
+        const lineWidth = 2;
+        const highlightColor = '#FFD700'; // Gold for highlighting
+        const highlightLineWidth = 4;
+        const textColor = '#333';
+        const fontSize = 14;
+
+        let selectedOrganism = null; // Stores the currently selected organism
+
+        /**
+         * Sets the initial positions of the organisms on the canvas.
+         * This uses a simple circular layout for better visualization.
+         */
+        function setInitialPositions() {
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = Math.min(centerX, centerY) * 0.6; // Smaller radius to fit emojis and text
+
+            organisms.forEach((org, index) => {
+                const angle = (index / organisms.length) * Math.PI * 2; // Distribute evenly in a circle
+                org.pos.x = centerX + radius * Math.cos(angle);
+                org.pos.y = centerY + radius * Math.sin(angle);
+            });
+        }
+
+        /**
+         * Draws an arrow from one point to another on the canvas.
+         * @param {number} fromX - X coordinate of the start point.
+         * @param {number} fromY - Y coordinate of the start point.
+         * @param {number} toX - X coordinate of the end point.
+         * @param {number} toY - Y coordinate of the end point.
+         * @param {string} color - Color of the arrow.
+         * @param {number} width - Line width of the arrow.
+         */
+        function drawArrow(fromX, fromY, toX, toY, color, width) {
+            const headlen = 10; // Length of the arrow head
+            const angle = Math.atan2(toY - fromY, toX - fromX);
+
+            ctx.beginPath();
+            ctx.moveTo(fromX, fromY);
+            ctx.lineTo(toX, toY);
+            ctx.strokeStyle = color;
+            ctx.lineWidth = width;
+            ctx.stroke();
+
+            // Draw the arrow head
+            ctx.beginPath();
+            ctx.moveTo(toX, toY);
+            ctx.lineTo(toX - headlen * Math.cos(angle - Math.PI / 6), toY - headlen * Math.sin(angle - Math.PI / 6));
+            ctx.moveTo(toX, toY);
+            ctx.lineTo(toX - headlen * Math.cos(angle + Math.PI / 6), toY - headlen * Math.sin(angle + Math.PI / 6));
+            ctx.strokeStyle = color;
+            ctx.lineWidth = width;
+            ctx.stroke();
+        }
+
+        /**
+         * Draws the entire food web on the canvas.
+         * This includes drawing all organisms as nodes (emojis) and the
+         * predator-prey relationships as directed lines (arrows).
+         */
+        function drawFoodWeb() {
+            // Clear the canvas before redrawing
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw lines (relationships) first
+            organisms.forEach(predator => {
+                predator.eats.forEach(preyName => {
+                    const prey = organisms.find(o => o.name === preyName);
+                    if (prey) {
+                        // Calculate start and end points for the arrow, slightly offset from the node centers
+                        const dx = prey.pos.x - predator.pos.x;
+                        const dy = prey.pos.y - predator.pos.y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        const unitX = dx / dist;
+                        const unitY = dy / dist;
+
+                        // Start and end points are offset by nodeRadius to draw from edge to edge
+                        const startX = predator.pos.x + unitX * nodeRadius;
+                        const startY = predator.pos.y + unitY * nodeRadius;
+                        const endX = prey.pos.x - unitX * nodeRadius;
+                        const endY = prey.pos.y - unitY * nodeRadius;
+
+                        // Check if this line needs to be highlighted
+                        const isHighlighted = selectedOrganism &&
+                            ((selectedOrganism === predator && predator.eats.includes(prey.name)) ||
+                             (selectedOrganism === prey && prey.eatenBy.includes(predator.name)));
+
+                        drawArrow(startX, startY, endX, endY, isHighlighted ? highlightColor : lineColor, isHighlighted ? highlightLineWidth : lineWidth);
+                    }
+                });
+            });
+
+            // Draw nodes (organisms) on top of the lines
+            organisms.forEach(org => {
+                // Draw highlight circle behind emoji if selected
+                if (org === selectedOrganism) {
+                    ctx.beginPath();
+                    ctx.arc(org.pos.x, org.pos.y, nodeRadius + 5, 0, Math.PI * 2); // Slightly larger highlight
+                    ctx.fillStyle = highlightColor;
+                    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+                    ctx.shadowBlur = 15;
+                    ctx.shadowOffsetX = 5;
+                    ctx.shadowOffsetY = 5;
+                    ctx.fill();
+                    ctx.shadowBlur = 0; // Reset shadow
+                    ctx.shadowOffsetX = 0;
+                    ctx.shadowOffsetY = 0;
+                }
+
+                // Draw the background circle for the emoji
+                ctx.beginPath();
+                ctx.arc(org.pos.x, org.pos.y, nodeRadius, 0, Math.PI * 2);
+                ctx.fillStyle = '#87CEEB'; // Sky blue for nodes
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+                ctx.shadowBlur = 8;
+                ctx.shadowOffsetX = 3;
+                ctx.shadowOffsetY = 3;
+                ctx.fill();
+                ctx.strokeStyle = '#007bff';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+
+                // Reset shadow for text
+                ctx.shadowBlur = 0;
+                ctx.shadowOffsetX = 0;
+                ctx.shadowOffsetY = 0;
+
+                // Draw emoji
+                ctx.fillStyle = textColor;
+                ctx.font = `${emojiSize}px Inter`; // Set font size for emoji
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(org.emoji, org.pos.x, org.pos.y - 10); // Position emoji slightly above center
+
+                // Draw text (organism name) below the emoji
+                ctx.fillStyle = textColor;
+                ctx.font = `${fontSize}px Inter`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'top'; // Align text to the top of its bounding box
+                ctx.fillText(org.name, org.pos.x, org.pos.y + (emojiSize / 2) - 5); // Position below the emoji
+            });
+        }
+
+        /**
+         * Calls the Gemini API to generate a fun fact about the selected organism.
+         */
+        async function generateFunFact() {
+            if (!selectedOrganism) {
+                funFactOutputElem.textContent = "Please select an organism first!";
+                return;
+            }
+
+            loadingIndicator.style.display = 'inline'; // Show loading indicator
+            funFactButton.disabled = true; // Disable button during generation
+            predictImpactButton.disabled = true; // Also disable other LLM button
+            funFactOutputElem.textContent = ''; // Clear previous fact
+            impactPredictionOutputElem.textContent = ''; // Clear previous impact prediction
+
+            const prompt = `Give me a short, interesting fun fact about ${selectedOrganism.name} in the context of the New Zealand marine environment. Keep it concise, one to two sentences.`;
+
+            let chatHistory = [];
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+            const payload = { contents: chatHistory };
+            const apiKey = ""; // Canvas will automatically provide the API key
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    funFactOutputElem.textContent = `Fun Fact: ${text}`;
+                } else {
+                    funFactOutputElem.textContent = "Could not generate a fun fact. Please try again.";
+                    console.error("Gemini API response structure unexpected:", result);
+                }
+            } catch (error) {
+                funFactOutputElem.textContent = "Error generating fun fact. Check console for details.";
+                console.error("Error calling Gemini API:", error);
+            } finally {
+                loadingIndicator.style.display = 'none'; // Hide loading indicator
+                funFactButton.disabled = false; // Re-enable button
+                predictImpactButton.disabled = false; // Re-enable other LLM button
+            }
+        }
+
+        /**
+         * Calls the Gemini API to predict the impact of population change on the food web.
+         */
+        async function predictImpact() {
+            if (!selectedOrganism) {
+                impactPredictionOutputElem.textContent = "Please select an organism first!";
+                return;
+            }
+
+            loadingIndicator.style.display = 'inline'; // Show loading indicator
+            funFactButton.disabled = true; // Disable other LLM button
+            predictImpactButton.disabled = true; // Disable button during generation
+            funFactOutputElem.textContent = ''; // Clear previous fun fact
+            impactPredictionOutputElem.textContent = ''; // Clear previous impact prediction
+
+            const prompt = `Considering a marine food web in New Zealand where ${selectedOrganism.name} is a ${selectedOrganism.type}, what would be the likely impact on the food web if the population of ${selectedOrganism.name} significantly decreased? Focus on direct and indirect effects on its prey and predators. Provide a concise summary in 2-3 sentences.`;
+
+            let chatHistory = [];
+            chatHistory.push({ role: "user", parts: [{ text: prompt }] });
+
+            const payload = { contents: chatHistory };
+            const apiKey = ""; // Canvas will automatically provide the API key
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    impactPredictionOutputElem.textContent = `Impact Prediction: ${text}`;
+                } else {
+                    impactPredictionOutputElem.textContent = "Could not predict impact. Please try again.";
+                    console.error("Gemini API response structure unexpected:", result);
+                }
+            } catch (error) {
+                impactPredictionOutputElem.textContent = "Error predicting impact. Check console for details.";
+                console.error("Error calling Gemini API:", error);
+            } finally {
+                loadingIndicator.style.display = 'none'; // Hide loading indicator
+                funFactButton.disabled = false; // Re-enable other LLM button
+                predictImpactButton.disabled = false; // Re-enable button
+            }
+        }
+
+        /**
+         * Updates the information box with details of the selected organism.
+         * @param {object | null} organism - The organism object to display, or null to clear.
+         */
+        function updateInfoBox(organism) {
+            if (organism) {
+                organismNameElem.textContent = organism.name;
+                organismRoleElem.textContent = `Type: ${organism.type}`;
+
+                // Display what it eats
+                if (organism.eats.length > 0) {
+                    organismEatsElem.textContent = `Eats: ${organism.eats.join(', ')}`;
+                } else {
+                    organismEatsElem.textContent = 'Eats: Nothing (Producer)';
+                }
+
+                // Display what eats it
+                if (organism.eatenBy.length > 0) {
+                    organismEatenByElem.textContent = `Eaten by: ${organism.eatenBy.join(', ')}`;
+                } else {
+                    organismEatenByElem.textContent = 'Eaten by: Nothing (Apex Predator)';
+                }
+                funFactButton.disabled = false; // Enable fun fact button
+                predictImpactButton.disabled = false; // Enable predict impact button
+            } else {
+                // Clear the info box
+                organismNameElem.textContent = 'Click an organism to learn more!';
+                organismRoleElem.textContent = '';
+                organismEatsElem.textContent = '';
+                organismEatenByElem.textContent = '';
+                funFactButton.disabled = true; // Disable fun fact button
+                predictImpactButton.disabled = true; // Disable predict impact button
+            }
+            funFactOutputElem.textContent = ''; // Clear previous fun fact
+            impactPredictionOutputElem.textContent = ''; // Clear previous impact prediction
+            loadingIndicator.style.display = 'none'; // Hide loading indicator
+        }
+
+        /**
+         * Handles clicks on the canvas to select an organism.
+         * @param {MouseEvent} event - The click event object.
+         */
+        function handleCanvasClick(event) {
+            // Get click coordinates relative to the canvas
+            const rect = canvas.getBoundingClientRect();
+            const clickX = event.clientX - rect.left;
+            const clickY = event.clientY - rect.top;
+
+            let clickedOrg = null;
+            // Check if any organism node was clicked. Use nodeRadius for click detection.
+            for (const org of organisms) {
+                const distance = Math.sqrt(
+                    Math.pow(clickX - org.pos.x, 2) +
+                    Math.pow(clickY - org.pos.y, 2)
+                );
+                if (distance <= nodeRadius) { // Click detection based on nodeRadius
+                    clickedOrg = org;
+                    break;
+                }
+            }
+
+            // Update selected organism and redraw
+            if (clickedOrg) {
+                selectedOrganism = clickedOrg;
+            } else {
+                selectedOrganism = null; // Clicked outside any organism
+            }
+            updateInfoBox(selectedOrganism);
+            drawFoodWeb(); // Redraw to show highlights
+        }
+
+        /**
+         * Handles the reset button click.
+         */
+        function handleReset() {
+            selectedOrganism = null;
+            updateInfoBox(null);
+            drawFoodWeb();
+        }
+
+        /**
+         * Adjusts canvas dimensions to match its display size.
+         * This is crucial for preventing blurry drawings on high-DPI screens
+         * and ensuring correct coordinate mapping.
+         */
+        function resizeCanvas() {
+            // Get the computed style of the canvas to determine its actual display size
+            const style = getComputedStyle(canvas);
+            const displayWidth = parseFloat(style.width);
+            const displayHeight = parseFloat(style.height);
+
+            // Set the canvas's internal drawing buffer size to match its display size
+            if (canvas.width !== displayWidth || canvas.height !== displayHeight) {
+                canvas.width = displayWidth;
+                canvas.height = displayHeight;
+                // Recalculate positions and redraw after resize
+                setInitialPositions();
+                drawFoodWeb();
+            }
+        }
+
+        // --- Event Listeners and Initial Setup ---
+
+        // Listen for canvas clicks
+        canvas.addEventListener('click', handleCanvasClick);
+
+        // Listen for reset button clicks
+        resetButton.addEventListener('click', handleReset);
+
+        // Listen for fun fact button clicks
+        funFactButton.addEventListener('click', generateFunFact);
+
+        // Listen for predict impact button clicks
+        predictImpactButton.addEventListener('click', predictImpact);
+
+        // Initial setup when the window loads
+        window.onload = function() {
+            // Set initial canvas size and organism positions
+            resizeCanvas(); // Set initial canvas size based on CSS
+            setInitialPositions(); // Arrange organisms on the canvas
+            drawFoodWeb(); // Draw the initial food web with emojis
+            updateInfoBox(null); // Clear info box initially
+
+            // Add a resize listener to redraw the canvas if the window size changes
+            // This ensures the food web remains responsive
+            window.addEventListener('resize', resizeCanvas);
+        };
+
+        // Prevent context menu on right click on canvas, if desired (optional)
+        canvas.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+    </script>
+</body>
+</html>
