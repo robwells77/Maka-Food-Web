@@ -262,7 +262,8 @@
         function setInitialPositions() {
             const centerX = canvas.width / 2;
             const centerY = canvas.height / 2;
-            const radius = Math.min(centerX, centerY) * 0.6; // Smaller radius to fit emojis and text
+            // Increased radius even further for maximum spread
+            const radius = Math.min(centerX, centerY) * 1.0; // Adjusted from 0.9 to 1.0 (full radius)
 
             organisms.forEach((org, index) => {
                 const angle = (index / organisms.length) * Math.PI * 2; // Distribute evenly in a circle
@@ -359,7 +360,7 @@
                 // Draw the background circle for the emoji
                 ctx.beginPath();
                 ctx.arc(org.pos.x, org.pos.y, nodeRadius, 0, Math.PI * 2);
-                ctx.fillStyle = '#87CEEB'; // Sky blue for nodes
+                ctx.fillStyle = '#87CEEB'; /* Sky blue for nodes */
                 ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
                 ctx.shadowBlur = 8;
                 ctx.shadowOffsetX = 3;
