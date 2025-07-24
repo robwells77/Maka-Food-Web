@@ -59,7 +59,7 @@
             display: block;
             width: 100%; /* Make canvas responsive */
             max-width: 800px; /* Max width for canvas */
-            height: 650px; /* Increased height for more spread */
+            height: 500px; /* Fixed height for canvas */
             margin: 0 auto;
             cursor: pointer;
         }
@@ -262,8 +262,7 @@
         function setInitialPositions() {
             const centerX = canvas.width / 2;
             const centerY = canvas.height / 2;
-            // Increased radius significantly for maximum spread with new canvas height
-            const radius = Math.min(centerX, centerY) * 0.95; // Adjusted to 0.95 to ensure some margin
+            const radius = Math.min(centerX, centerY) * 0.6; // Smaller radius to fit emojis and text
 
             organisms.forEach((org, index) => {
                 const angle = (index / organisms.length) * Math.PI * 2; // Distribute evenly in a circle
@@ -360,7 +359,7 @@
                 // Draw the background circle for the emoji
                 ctx.beginPath();
                 ctx.arc(org.pos.x, org.pos.y, nodeRadius, 0, Math.PI * 2);
-                ctx.fillStyle = '#87CEEB'; /* Sky blue for nodes */
+                ctx.fillStyle = '#87CEEB'; // Sky blue for nodes
                 ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
                 ctx.shadowBlur = 8;
                 ctx.shadowOffsetX = 3;
@@ -412,8 +411,7 @@
             chatHistory.push({ role: "user", parts: [{ text: prompt }] });
 
             const payload = { contents: chatHistory };
-            // IMPORTANT: Replace "YOUR_GEMINI_API_KEY_HERE" with your actual Gemini API key
-            const apiKey = "YOUR_GEMINI_API_KEY_HERE";
+            const apiKey = “AIzaSyC7IhayrAXiYr5UiBftvYa_is5iZIip0OA”
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
             try {
@@ -464,8 +462,7 @@
             chatHistory.push({ role: "user", parts: [{ text: prompt }] });
 
             const payload = { contents: chatHistory };
-            // IMPORTANT: Replace "YOUR_GEMINI_API_KEY_HERE" with your actual Gemini API key
-            const apiKey = "YOUR_GEMINI_API_KEY_HERE";
+            const apiKey = "AIzaSyC7IhayrAXiYr5UiBftvYa_is5iZIip0OA"; 
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
             try {
