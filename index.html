@@ -59,7 +59,7 @@
             display: block;
             width: 100%; /* Make canvas responsive */
             max-width: 800px; /* Max width for canvas */
-            height: 500px; /* Fixed height for canvas */
+            height: 650px; /* Increased height for more spread */
             margin: 0 auto;
             cursor: pointer;
         }
@@ -262,8 +262,8 @@
         function setInitialPositions() {
             const centerX = canvas.width / 2;
             const centerY = canvas.height / 2;
-            // Increased radius even further for maximum spread
-            const radius = Math.min(centerX, centerY) * 1.0; // Adjusted from 0.9 to 1.0 (full radius)
+            // Increased radius significantly for maximum spread with new canvas height
+            const radius = Math.min(centerX, centerY) * 0.95; // Adjusted to 0.95 to ensure some margin
 
             organisms.forEach((org, index) => {
                 const angle = (index / organisms.length) * Math.PI * 2; // Distribute evenly in a circle
@@ -412,7 +412,8 @@
             chatHistory.push({ role: "user", parts: [{ text: prompt }] });
 
             const payload = { contents: chatHistory };
-            const apiKey = ""; // Canvas will automatically provide the API key
+            // IMPORTANT: Replace "YOUR_GEMINI_API_KEY_HERE" with your actual Gemini API key
+            const apiKey = "YOUR_GEMINI_API_KEY_HERE";
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
             try {
@@ -463,7 +464,8 @@
             chatHistory.push({ role: "user", parts: [{ text: prompt }] });
 
             const payload = { contents: chatHistory };
-            const apiKey = ""; // Canvas will automatically provide the API key
+            // IMPORTANT: Replace "YOUR_GEMINI_API_KEY_HERE" with your actual Gemini API key
+            const apiKey = "YOUR_GEMINI_API_KEY_HERE";
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
             try {
